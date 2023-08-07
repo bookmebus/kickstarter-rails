@@ -1,0 +1,37 @@
+<div>
+    <div class="max-w-lg mx-auto">
+        <h2 class="my-5 text-lg">
+            Edit Vendor
+        </h2>
+        <%= form_with model: @vendor do |form| %>
+            <div class="py-5 px-7 flex-col space-y-5 bg-gray-200 border-md rounded-md">
+                <div>
+                    <%= form.label :name %>
+                    <%= form.text_field :name, class: "border border-gray-400 p-2 rounded" %>
+                </div>
+                <div class="flex-col">
+                    <%= form.label :profile_image %>
+                    <%= form.text_field :profile_image, class: "border border-gray-400 p-2 rounded" %>
+                </div>
+                <div class="flex-col">
+                    <%= form.label :cover_image %>
+                    <%= form.text_field :cover_image, class: "border border-gray-400 p-2 rounded" %>
+                </div>
+                <div class="flex-col">
+                    <%= form.label :product_type %>
+                    <%= form.text_field :product_type, class: "border border-gray-400 p-2 rounded" %>
+                </div>
+                <div class="flex-col">
+                    <%= form.label :phone %>
+                    <%= form.text_field :phone, class: "border border-gray-400 p-2 rounded" %>
+                </div>
+                <div class="flex-col">
+                    <%= form.label :email %>
+                    <%= form.text_field :email, class: "border border-gray-400 p-2 rounded" %>
+                </div>
+                <div class="flex justify-end">
+                    <%= form.submit "Save", class: "px-6 py-2 bg-blue-500 text-white" %>
+                </div>
+            </div>
+        <% end %>
+</div>

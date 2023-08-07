@@ -1,0 +1,35 @@
+<div>
+    <div class="max-w-lg mx-auto">
+            <h2 class="my-5 text-lg">
+                <%= @vendor.name %>
+            </h2>
+        <div class="py-5 px-7 flex-col space-y-5 bg-gray-200 border-md rounded-md">
+            <div>
+                <strong>Profile Image:</strong>
+                <img src=<%= @vendor.profile_image %>>
+            </div>
+
+            <div>
+                <strong>Cover Image:</strong>
+                <img src=<%= @vendor.cover_image %>>
+
+            </div>
+            <div>
+                <strong>Product Type:</strong>
+                <%= @vendor.product_type %>
+            </div>
+            <div>
+                <strong>Email:</strong>
+                <%= @vendor.email %>
+            </div>
+            <div>
+                <strong>Email:</strong>
+                <%= @vendor.phone %>
+            </div>
+            <div class="flex justify-end space-x-5">
+                <%= button_to "Delete Vendor", vendor_path(@vendor), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "px-6 py-2 bg-red-500 text-white" %>
+                <%= link_to "Edit Vendor", edit_vendor_path(@vendor), class: "px-6 py-2 bg-blue-500 text-white" %>
+            </div>
+        </div>
+    </div>
+</div>
