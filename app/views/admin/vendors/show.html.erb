@@ -26,6 +26,10 @@
                 <strong>Email:</strong>
                 <%= @vendor.phone %>
             </div>
+            <div class="flex justify-end space-x-5">
+                <%= button_to "Delete Vendor", admin_vendor_path(@vendor), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "px-6 py-2 bg-red-500 text-white" %>
+                <%= link_to "Edit Vendor", edit_admin_vendor_path(@vendor), class: "px-6 py-2 bg-blue-500 text-white" %>
+            </div>
         </div>
     </div>
 </div>

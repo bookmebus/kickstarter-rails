@@ -2,11 +2,12 @@
     <h2 class="text-lg">
         Vendor List
     </h2>
+    <%= link_to "Add Vendor", new_admin_vendor_path, class: "px-6 py-2 bg-blue-500 text-white" %>
 </div>
 
 <div class="max-w-5xl mx-auto grid grid-cols-4">
     <% @vendors.each do |vendor| %>
-        <%= link_to vendor do %>
+        <%= link_to admin_vendor_path(vendor) do %>
             <div class="border border-blue-500">
                 <img src=<%= vendor.profile_image %>>
                 <p class="mx-auto"><%= vendor.name %></p>

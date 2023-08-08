@@ -6,7 +6,14 @@ Rails.application.routes.draw do
 
   root "vendors#index"
 
-  resources :vendors
+  # Defines routes for admin
+  namespace :admin do
+    resources :vendors
+  end
+
+  # Defines routes for users
+
+  resources :vendors, only: [:index, :show]
 
   resources :products, only: [:index, :show]
 end
