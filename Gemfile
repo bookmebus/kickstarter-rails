@@ -76,3 +76,5 @@ end
 gem "pg", "~> 1.5"
 
 gem "foreman"
+
+gem "devise", "~> 4.9"
