@@ -1,0 +1,35 @@
+<div class="max-w-lg mx-auto">
+  <h2 class="my-5 text-lg">
+    <%= @product.name %>
+  </h2>
+  <div class="py-5 px-7 space-y-5 bg-gray-200 border-md rounded-md">
+    <div class="flex flex-col items-center">
+      <strong>Product Image:</strong>
+      <img src="<%= @product.image %>" alt="<%= @product.name %>" class="max-w-full">
+    </div>
+    <div>
+      <strong>Price:</strong>
+      $<%= number_with_precision(@product.price, precision: 2) %>
+    </div>
+    <div>
+      <strong>Quantity:</strong>
+      <%= @product.quantity %>
+    </div>
+    <div>
+      <strong>Description:</strong>
+      <%= @product.description %>
+    </div>
+    <div>
+      <strong>Discount Price:</strong>
+      $<%= number_with_precision(@product.discount_price, precision: 2) %>
+    </div>
+    <div>
+      <strong>Status:</strong>
+      <%= @product.is_out_of_stock ? 'Out of Stock' : 'Available' %>
+    </div>
+    <div class="flex justify-end space-x-5">
+                <%= button_to "Delete Item", admin_product_path(@product), method: :delete, data: { turbo_confirm: "Are you sure want to delete?" }, class: "px-6 py-2 bg-red-500 text-white" %>
+                <%= link_to "Edit Item", edit_admin_product_path(@product), class: "px-6 py-2 bg-blue-500 text-white" %>
+            </div>
+  </div>
+</div>

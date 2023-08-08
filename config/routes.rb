@@ -4,11 +4,12 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  root "vendors#index"
+  root "products#index"
 
   # Defines routes for admin
   namespace :admin do
     resources :vendors
+    resources :products
   end
 
   # Defines routes for users

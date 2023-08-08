@@ -1,3 +1,4 @@
+module Admin
 class ProductsController < ApplicationController
     def index
          @products = Product.all
@@ -34,7 +35,8 @@ class ProductsController < ApplicationController
         redirect_to products_path
     end
     private
-    def product_programs 
+    def product_params 
         params.require(:product).permit(:name, :image, :quantity, :description, :price, :discount_price, :is_out_of_stock, :vendor_id)
     end
+end
 end
