@@ -1,5 +1,5 @@
 module Admin
-class ProductsController < ApplicationController
+class ProductsController < BaseController
     def index
          @products = Product.all
     end
