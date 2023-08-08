@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  root "vendors#index"
+   root "vendors#index"
+   
+  devise_for :users
 
   # Defines routes for admin
   namespace :admin do
