@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   root "products#index"
+   
+  devise_for :users
 
   # Defines routes for admin
   namespace :admin do
