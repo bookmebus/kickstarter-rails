@@ -13,8 +13,23 @@
 
   <body>
     <main>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+    <div class="py-5 px-6 mb-10 flex justify-between bg-blue-500 text-white">
+        <h2><%= link_to "KickstarterRails", root_path %></h2>
+        <% if user_signed_in? %>
+          <div class="flex space-x-5">
+            <%= link_to "Profile", edit_user_registration_path %>
+            <%= button_to "Sign Out", destroy_user_session_path, method: :delete %>
+          </div>
+        <% else %>
+          <div class="flex space-x-5">
+              <%= link_to "Sign Up", new_user_registration_path, class: "px-6 py-2 bg-blue-500 text-white" %>
+              <%= link_to "Sign In", new_user_session_path, class: "px-6 py-2 bg-blue-500 text-white" %>
+          </div>
+        <% end %>
+    </div>
+
+    <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
 
       <%= yield %>
     </main>

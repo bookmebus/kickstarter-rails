@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   # Defines routes for admin
   namespace :admin do
+    root "products#index"
     resources :vendors
     resources :products
   end
