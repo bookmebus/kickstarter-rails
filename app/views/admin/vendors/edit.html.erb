@@ -3,7 +3,7 @@
         <h2 class="my-5 text-lg">
             Edit Vendor
         </h2>
-        <%= form_with model: @vendor do |form| %>
+        <%= form_with model: @vendor, url: admin_vendor_path(@vendor) do |form| %>
             <div class="py-5 px-7 flex-col space-y-5 bg-gray-200 border-md rounded-md">
                 <div>
                     <%= form.label :name %>
