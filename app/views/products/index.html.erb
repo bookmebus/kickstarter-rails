@@ -1,17 +1,15 @@
-<div class="mx-24 py-10 flex justify-between">
-    <h2 class="text-lg">
-        Product list
-    </h2>
-</div>
+<div class="bg-gradient-to-r from-indigo-300 to-blue-200 py-8">
+    <div class="mx-auto container px-8 bg-white rounded-lg shadow-lg">
+        <h2 class="text-3xl font-semibold mb-6 px-4 py-2 bg-blue-200 rounded-t-lg">Product List</h2>
 
-<div class="max-w-5xl mx-auto grid grid-cols-4">
-    <% @products.each do |product| %>
-        <%= link_to product do %>
-            <div class="border border-blue-500">
-                <img src=<%= product.image %>>
-                <p class="mx-auto"><%= product.name %></p>
-                <p calss="mx-auto"><%= product.price%></p>
-            </div>
-        <% end %>
-    <% end %>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+            <% @products.each do |product| %>
+                <%= link_to product, class: "block border border-gray-300 rounded-md transition transform hover:scale-105" do %>
+                    <div class="p-4 bg-gray-50 rounded-md hover:bg-gray-100 transition">
+                        <p class="text-lg font-medium text-center text-gray-800 truncate"><%= product.name %></p>
+                    </div>
+                <% end %>
+            <% end %>
+        </div>
+    </div>
 </div>
