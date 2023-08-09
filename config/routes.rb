@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   # Defines routes for users
 
-  resources :vendors, only: [:index, :show]
+  resources :vendors, only: [:index, :show] 
 
-  resources :products, only: [:index, :show]
+  resources :products, only: [:index, :show] 
 end
