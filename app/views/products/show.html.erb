@@ -1,21 +1,13 @@
 <div class="max-w-lg mx-auto">
-  <h2 class="my-5 text-lg">
+  <h2 class="my-5 text-lg text-right">
     <%= @product.name %>
   </h2>
   <div class="py-5 px-7 flex-col space-y-5 bg-gray-200 border-md rounded-md">
-    <div class="flex flex-col items-center">
-      <strong>Product Image:</strong>
-      <img src="<%= @product.image %>" alt="<%= @product.name %>" class="max-w-full">
+    <div class="flex flex-col items-end">
+      <strong class="text-right">Product:</strong>
+      <%= @product.name %>
     </div>
-    <div>
-      <strong>Price:</strong>
-      $<%= number_with_precision(@product.price, precision: 2) %>
-    </div>
-    <div>
-      <strong>Quantity:</strong>
-      <%= @product.quantity %>
-    </div>
-    <div>
+    <div class="text-right">
       <strong>Description:</strong>
       <%= @product.description %>
     </div>
