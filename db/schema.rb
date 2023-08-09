@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_09_022526) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_09_025000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,6 +43,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_09_022526) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "variant_values", force: :cascade do |t|
+    t.bigint "variant_id", null: false
+    t.string "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["variant_id"], name: "index_variant_values_on_variant_id"
+  end
+
+  create_table "variants", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "vendors", force: :cascade do |t|
     t.string "name"
     t.string "profile_image"
@@ -55,4 +69,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_09_022526) do
   end
 
   add_foreign_key "product_details", "products"
+  add_foreign_key "variant_values", "variants"
 end
