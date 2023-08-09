@@ -1,17 +1,18 @@
 <div class="mx-24 py-10 flex justify-between">
-    <h2 class="text-lg">
-        Product list
-    </h2>
+  <h2 class="text-lg">
+    Product List
+  </h2>
 </div>
 
-<div class="max-w-5xl mx-auto grid grid-cols-4">
-    <% @products.each do |product| %>
-        <%= link_to product do %>
-            <div class="border border-blue-500">
-                <img src=<%= product.image %>>
-                <p class="mx-auto"><%= product.name %></p>
-                <p calss="mx-auto"><%= product.price%></p>
-            </div>
-        <% end %>
-    <% end %>
+<div class="max-w-5xl mx-auto grid grid-cols-4 gap-4">
+  <% @products.each do |product| %>
+    <div class="border border-blue-500">
+      <%= link_to product do %>
+        <img src="<%= product.image %>">
+        <p class="mx-auto"><%= product.name %></p>
+        <p class="mx-auto"><%= product.price %></p>
+      <% end %>
+     
+    </div>
+  <% end %>
 </div>
