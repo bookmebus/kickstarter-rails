@@ -78,3 +78,5 @@ gem "pg", "~> 1.5"
 gem "foreman"
 
 gem "devise", "~> 4.9"
+
+gem "byebug", "~> 11.1", :groups => [:development, :test]

@@ -6,6 +6,7 @@ module Admin
         
         def show
             @variant = Variant.find_by_id(params[:id])
+            @variant_values = @variant.variant_values
         end
         
         def new
@@ -30,8 +31,10 @@ module Admin
         def update
             @variant = Variant.find_by_id(params[:id])
             if @variant.update(variant_params)
+                flash[:notice] = "Variant was successfully updated."
                 redirect_to admin_variant_path(@variant)
             else
+                flash[:error] = "Variant could not be updated."
                 render :edit
             end
         end
