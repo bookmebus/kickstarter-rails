@@ -8,9 +8,27 @@
     <%= link_to "Edit Option Type", edit_admin_option_type_path(@option_type), class: "px-6 py-2 bg-blue-500 text-white" %>
     </div>
   </div>
-  <div class="py-5 px-7 space-y-5 bg-gray-200 border-md rounded-md">
-    <div class="flex items-center">
-      <strong>Add Option Value:</strong>
+  <div class="my-5 flex-col space-y-5">
+    <% @option_values.each do |option_value| %>
+        <div class="flex justify-between py-5 px-7 bg-gray-200 border-md rounded-md">
+            <p><%= option_value.value %></p>
+            <div class="flex space-x-5">
+                <%= link_to edit_admin_option_value_path(option_value) do %>
+                    <i class="fa-solid fa-pen"></i>
+                <% end %>
+                <%= button_to admin_option_value_path(option_value), method: :delete, data: { turbo_confirm: "Are you sure want to delete?" } do %>
+                    <i class="fa-solid fa-trash" style="color: #ff0000;"></i>
+                <% end %>
+            </div>
+        </div>
+    <% end %>
     </div>
-  </div>
+    <div class="my-5 flex space-x-5">
+        <strong>Add Option Value:</strong>
+        <%= form_with(model: @option_value, url: admin_option_values_path) do |form| %>
+        <%= form.hidden_field :option_type_id, value: @option_type.id %>
+        <%= form.text_field :value, class: "border border-gray-400 p-2 rounded" %>
+        <%= form.submit "Add", class: "px-6 py-2 bg-blue-500 text-white" %>
+        <% end %>
+    </div>
 </div>
