@@ -6,6 +6,7 @@ module Admin
         
         def show
             @option_type = OptionType.find_by_id(params[:id])
+            @option_values = @option_type.option_values
         end
         
         def new
