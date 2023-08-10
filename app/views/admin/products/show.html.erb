@@ -14,6 +14,12 @@
       <strong>Description:</strong>
       <%= @product.description %>
     </div>
+    <div>
+      <strong>Option Type Product:</strong>
+      <% @option_type_products.each do |option_type_product| %>
+        <p><%= option_type_product.name %></p>
+      <% end %>
+    </div>
     <div class="flex justify-end space-x-5">
         <%= button_to "Delete Item", admin_product_path(@product), method: :delete, data: { turbo_confirm: "Are you sure want to delete?" }, class: "px-6 py-2 bg-red-500 text-white" %>
         <%= link_to "Edit Item", edit_admin_product_path(@product), class: "px-6 py-2 bg-blue-500 text-white" %>

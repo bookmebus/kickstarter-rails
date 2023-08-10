@@ -6,14 +6,25 @@ class ProductsController < BaseController
     
     def show
         @product = Product.find_by_id(params[:id])
+        @option_type_products = @option_types = OptionType.joins(:option_type_products).where(option_type_products: { product_id: @product.id })
     end
     def new
-        @product = Product.new 
+        @product = Product.new
+        @option_types = OptionType.all 
     end
     def create
         @product = Product.new(product_params)
+
+        #loop for each optiontype create option type product
+
         if @product.save
-            redirect_to @product
+            @option_type_ids = params[:product][:option_type_ids]
+
+            @option_type_ids.each do |option_type_id|
+                OptionTypeProduct.create(option_type_id: option_type_id, product_id: @product.id)
+            end
+
+            redirect_to admin_product_path(@product)
         else
             render :new
         end
@@ -32,12 +43,12 @@ class ProductsController < BaseController
     def destroy
         @product=Product.find_by_id(params[:id])
         @product.destroy
-        redirect_to products_path
+        redirect_to admin_products_path
     end
 
     private
     def product_params 
-        params.require(:product).permit(:name, :image, :quantity, :description, :price, :discount_price, :is_out_of_stock, :vendor_id)
+        params.require(:product).permit(:name, :description)
     end
 end
 end
