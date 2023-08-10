@@ -1,10 +1,33 @@
 <div class="max-w-lg mx-auto">
-  <h2 class="my-5 text-lg">
-    <%= @variant.name %>
-  </h2>
+  <div class="my-5 flex justify-between">
+    <h2 class="text-lg">
+      <%= @variant.name %>
+    </h2>
+    <%= link_to "Add Value", new_admin_variant_value_path(params: { :variant_id => @variant }), class: "px-6 py-2 bg-blue-500 text-white" %>
+  </div>
+  <div class="my-5">
+        <table class="w-full border-collapse">
+            <thead>
+                <tr>
+                    <th class="border p-2">Id</th>
+                    <th class="border p-2">Value</th>
+                    <th class="border p-2">Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @variant_values.each do |value| %>
+                    <tr>
+                        <td class="border p-2"><%= variant.id %></td>
+                        <td class="border p-2"><%= variant.name %></td>
+                        <td class="border p-2"><%= link_to "show", admin_variant_path(variant) %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
     <div class="flex justify-end space-x-5">
-                <%= button_to "Delete Item", admin_variant_path(@variant), method: :delete, data: { turbo_confirm: "Are you sure want to delete?" }, class: "px-6 py-2 bg-red-500 text-white" %>
-                <%= link_to "Edit Item", edit_admin_variant_path(@variant), class: "px-6 py-2 bg-blue-500 text-white" %>
-            </div>
+        <%= button_to "Delete Variant", admin_variant_path(@variant), method: :delete, data: { turbo_confirm: "Are you sure want to delete?" }, class: "px-6 py-2 bg-red-500 text-white" %>
+        <%= link_to "Edit Variant", edit_admin_variant_path(@variant), class: "px-6 py-2 bg-blue-500 text-white" %>
+    </div>
   </div>
 </div>
