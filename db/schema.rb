@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_10_083741) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_10_152421) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "option_type_products", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "option_type_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["option_type_id"], name: "index_option_type_products_on_option_type_id"
+    t.index ["product_id"], name: "index_option_type_products_on_product_id"
+  end
 
   create_table "option_types", force: :cascade do |t|
     t.string "name", null: false
@@ -69,6 +78,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_10_083741) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "option_type_products", "option_types"
+  add_foreign_key "option_type_products", "products"
   add_foreign_key "option_values", "option_types"
   add_foreign_key "variants", "products"
 end
