@@ -1,0 +1,10 @@
+<div class="max-w-lg mx-auto">
+  <h2 class="my-5 text-lg">
+    <%= @variant.name %>
+  </h2>
+    <div class="flex justify-end space-x-5">
+                <%= button_to "Delete Item", admin_variant_path(@variant), method: :delete, data: { turbo_confirm: "Are you sure want to delete?" }, class: "px-6 py-2 bg-red-500 text-white" %>
+                <%= link_to "Edit Item", edit_admin_variant_path(@variant), class: "px-6 py-2 bg-blue-500 text-white" %>
+            </div>
+  </div>
+</div>
