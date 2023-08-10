@@ -9,28 +9,8 @@
         <%= form.text_field :name, class: "border border-gray-400 p-2 rounded" %>
       </div>
       <div>
-        <%= form.label :image %>
-        <%= form.text_field :image, class: "border border-gray-400 p-2 rounded" %>
-      </div>
-      <div>
-        <%= form.label :price %>
-        <%= form.number_field :price, class: "border border-gray-400 p-2 rounded" %>
-      </div>
-      <div>
-        <%= form.label :quantity %>
-        <%= form.text_field :quantity, class: "border border-gray-400 p-2 rounded" %>
-      </div>
-      <div>
         <%= form.label :description %>
         <%= form.text_area :description, class: "border border-gray-400 p-2 rounded" %>
-      </div>
-      <div>
-        <%= form.label :discount_price %>
-        <%= form.number_field :discount_price, class: "border border-gray-400 p-2 rounded" %>
-      </div>
-      <div>
-        <%= form.label :is_out_of_stock %>
-        <%= form.check_box :is_out_of_stock, class: "mr-2" %>
       </div>
       <div class="flex justify-end">
         <%= form.submit "Create", class: "px-6 py-2 bg-blue-500 text-white" %>
