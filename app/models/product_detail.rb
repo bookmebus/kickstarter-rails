@@ -1,8 +1,8 @@
 class ProductDetail < ApplicationRecord
     validates :name, presence: true
-    validates :image
-    validates :quantity
-    validates :price
+    validate :image
+    validate :quantity
+    validate :price
 
     belongs_to :product
     has_many :product_variants
