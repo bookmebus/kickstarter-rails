@@ -9,8 +9,7 @@
         <table class="w-full border-collapse">
             <thead>
                 <tr>
-                    <th class="border p-2">Id</th>
-                    <th class="border p-2">Variant</th>
+                    <th class="border p-2">Variant id</th>
                     <th class="border p-2">Link</th>
                 </tr>
             </thead>
@@ -18,7 +17,6 @@
                 <% @variants.each do |variant| %>
                     <tr>
                         <td class="border p-2"><%= variant.id %></td>
-                        <td class="border p-2"><%= variant.name %></td>
                         <td class="border p-2"><%= link_to "show", admin_variant_path(variant) %></td>
                     </tr>
                 <% end %>

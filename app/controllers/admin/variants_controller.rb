@@ -11,6 +11,9 @@ module Admin
         
         def new
             @variant = Variant.new
+            @variants = Variant.all
+
+            @product = Product.find_by_id(params[:product_id])
         end
         
         def create

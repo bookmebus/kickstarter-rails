@@ -24,7 +24,7 @@ class ProductsController < BaseController
     def update
         @product = Product.find_by_id(params[:id])
         if @product.update(product_params)
-            redirect_to @product
+            redirect_to admin_product_path(@product)
         else
             render :edit
         end
@@ -34,6 +34,7 @@ class ProductsController < BaseController
         @product.destroy
         redirect_to products_path
     end
+
     private
     def product_params 
         params.require(:product).permit(:name, :image, :quantity, :description, :price, :discount_price, :is_out_of_stock, :vendor_id)
