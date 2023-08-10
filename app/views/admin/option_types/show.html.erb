@@ -1,0 +1,16 @@
+<div class="max-w-lg mx-auto">
+  <div class="flex justify-between my-5">
+  <h2 class="text-lg">
+    <%= @option_type.name %>
+  </h2>
+  <div class="flex space-x-5">
+    <%= button_to "Delete Option Type", admin_option_type_path(@option_type), method: :delete, data: { turbo_confirm: "Are you sure want to delete?" }, class: "px-6 py-2 bg-red-500 text-white" %>
+    <%= link_to "Edit Option Type", edit_admin_option_type_path(@option_type), class: "px-6 py-2 bg-blue-500 text-white" %>
+    </div>
+  </div>
+  <div class="py-5 px-7 space-y-5 bg-gray-200 border-md rounded-md">
+    <div class="flex items-center">
+      <strong>Add Option Value:</strong>
+    </div>
+  </div>
+</div>

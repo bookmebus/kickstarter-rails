@@ -1,0 +1,28 @@
+<div class="mx-auto max-w-lg">
+    <div class="mx-auto flex justify-between">
+        <h2 class="text-lg">
+            Option Types List
+        </h2>
+            <%= link_to "Add Option Type", new_admin_option_type_path, class: "px-6 py-2 bg-blue-500 text-white" %>
+    </div>
+    <div class="my-5">
+        <table class="w-full border-collapse">
+            <thead>
+                <tr>
+                    <th class="border p-2">Id</th>
+                    <th class="border p-2">Option Type</th>
+                    <th class="border p-2">Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @option_types.each do |option_type| %>
+                    <tr>
+                        <td class="border p-2"><%= option_type.id %></td>
+                        <td class="border p-2"><%= option_type.name %></td>
+                        <td class="border p-2"><%= link_to "show", admin_option_type_path(option_type) %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>

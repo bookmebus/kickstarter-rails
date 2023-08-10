@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     root "products#index"
     resources :vendors
 
+    resources :option_types
+
     resources :variants
 
     resources :products
