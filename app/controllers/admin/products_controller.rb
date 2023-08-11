@@ -6,7 +6,7 @@ class ProductsController < BaseController
     
     def show
         @product = Product.find_by_id(params[:id])
-        @option_type_products = @option_types = OptionType.joins(:option_type_products).where(option_type_products: { product_id: @product.id })
+        @variants = @product.variants
     end
     def new
         @product = Product.new
@@ -31,6 +31,8 @@ class ProductsController < BaseController
     end
     def edit
         @product = Product.find_by_id(params[:id])
+
+        @option_types = OptionType.all 
     end
     def update
         @product = Product.find_by_id(params[:id])

@@ -38,6 +38,11 @@ module Admin
         
         def edit
             @variant = Variant.find_by_id(params[:id])
+
+            @product = Product.find_by_id(params[:product_id])
+
+            @option_types = OptionType.joins(:option_type_products).where(option_type_products: { product_id: @product.id })
+            @option_values = @option_types.map(&:option_values).flatten
         end
         
         def update
