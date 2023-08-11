@@ -6,6 +6,10 @@
     <%= link_to "Add Variant", new_admin_variant_path(product_id: @product.id), class: "px-6 py-2 bg-blue-500 text-white" %>
   </div>
   <div class="py-5 px-7 space-y-5 bg-gray-200 border-md rounded-md">
+    <div class="flex justify-between">
+        <%= link_to "Edit Product", edit_admin_product_path(@product), class: "px-6 py-2 bg-blue-500 text-white" %>
+        <%= button_to "Delete Product", admin_product_path(@product), method: :delete, data: { turbo_confirm: "Are you sure want to delete?" }, class: "px-6 py-2 bg-red-500 text-white" %>
+    </div>
     <div>
       <strong>Product Name:</strong>
       <%= @product.name %>
@@ -14,15 +18,30 @@
       <strong>Description:</strong>
       <%= @product.description %>
     </div>
-    <div>
-      <strong>Option Type Product:</strong>
-      <% @option_type_products.each do |option_type_product| %>
-        <p><%= option_type_product.name %></p>
+    <% @variants.each do |variant| %>
+      <div class="px-6 py-5 bg-white rounded">
+          <div>
+          <strong>Spec:</strong>
+          <% variant.option_values.each do |option_value| %>
+            <%= option_value.value %>
+          <% end %>
+        </div>
+        <div class="flex space-x-5">
+          <strong>Price:</strong>
+          <p>$<%= variant.price %></p>
+        </div>
+        <div>
+          <strong>Stock:</strong> 
+          <%= variant.quantity %>
+        </div>
+        <div class="my-5">
+          <img src=<%= variant.image %>>
+        </div>
+        <div class="flex justify-between">
+          <%= link_to "Edit Variant", edit_admin_variant_path(variant, product_id: @product.id), class: "px-6 py-2 bg-blue-500 text-white" %>
+          <%= button_to "Delete Variant", admin_variant_path(variant), method: :delete, data: { turbo_confirm: "Are you sure want to delete?" }, class: "px-6 py-2 bg-red-500 text-white" %>
+        </div>
+      </div>
       <% end %>
-    </div>
-    <div class="flex justify-end space-x-5">
-        <%= button_to "Delete Item", admin_product_path(@product), method: :delete, data: { turbo_confirm: "Are you sure want to delete?" }, class: "px-6 py-2 bg-red-500 text-white" %>
-        <%= link_to "Edit Item", edit_admin_product_path(@product), class: "px-6 py-2 bg-blue-500 text-white" %>
-    </div>
   </div>
 </div>

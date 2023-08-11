@@ -1,16 +1,39 @@
 <div class="max-w-lg mx-auto">
-  <h2 class="my-5 text-lg">
-    New Variant
-  </h2>
-  <%= form_with(model: @variant, url: admin_variant_path) do |form| %>
-    <div class="py-5 px-7 space-y-5 bg-gray-200 border-md rounded-md">
-      <div>
-        <%= form.label :name %>
-        <%= form.text_field :name, class: "border border-gray-400 p-2 rounded" %>
-      </div>
-      <div class="flex justify-end">
-        <%= form.submit "Save", class: "px-6 py-2 bg-blue-500 text-white" %>
-      </div>
+    <div class="flex justify-between my-5">
+        <h2 class="text-lg">
+            Add Variant
+        </h2>
     </div>
-  <% end %>
+    <div class="py-5 px-7 space-y-5 bg-gray-200 border-md rounded-md">
+        <%= form_with model: @variant, url: admin_variants_path, method: :post do |form| %>
+        <%= form.hidden_field :product_id, value: @product.id %>
+            <div class="flex flex-col space-y-5">
+                <% @option_types.each do |option_type| %>
+                <div>
+                    <%= form.label option_type.name, class: "font-bold" %>
+                    <select name="option_value_ids[]" class="border border-gray-300 rounded-md p-2 w-full">
+                        <% option_type.option_values.each do |option_value| %>
+                            <option value="<%= option_value.id %>"><%= option_value.value %></option>
+                        <% end %>
+                    </select>
+                </div>
+                <% end %>
+                <div>
+                    <%= form.label :image, class: "text-sm" %>
+                    <%= form.text_field :image, class: "border border-gray-300 rounded-md p-2 w-full" %>
+                </div>
+                <div>
+                    <%= form.label :price, class: "text-sm" %>
+                    <%= form.number_field :price, class: "border border-gray-300 rounded-md p-2 w-full" %>
+                </div>
+                <div>
+                    <%= form.label :quantity, class: "text-sm" %>
+                    <%= form.number_field :quantity, class: "border border-gray-300 rounded-md p-2 w-full" %>
+                </div>
+                <div class="flex justify-end space-x-5">
+                    <%= form.submit "Add Variant", class: "px-6 py-2 bg-blue-500 text-white" %>
+                </div>
+            </div>
+        <% end %>
+    </div>
 </div>
