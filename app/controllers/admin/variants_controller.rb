@@ -47,14 +47,25 @@ module Admin
         
         def update
             @variant = Variant.find_by_id(params[:id])
+          
             if @variant.update(variant_params)
-                flash[:notice] = "Variant was successfully updated."
-                redirect_to admin_variant_path(@variant)
+              # Update associated OptionValueVariants
+              @option_value_ids = params[:option_value_ids]
+              @variant.option_value_variants.destroy_all # Remove existing associations
+          
+              @option_value_ids.each do |option_value_id|
+                OptionValueVariant.create(option_value_id: option_value_id, variant_id: @variant.id)
+              end
+          
+              flash[:notice] = "Variant was successfully updated."
+              redirect_to admin_product_path(@variant.product)
             else
-                flash[:error] = "Variant could not be updated."
-                render :edit
+              flash[:error] = "Variant could not be updated."
+              render :edit
             end
-        end
+          end
+          
+
         
         def destroy
             @variant = Variant.find_by_id(params[:id])
