@@ -14,10 +14,10 @@ Rails.application.routes.draw do
     resources :vendors
 
     resources :option_types
-    #create post for option values
+
     resources :option_values, except: [:index, :show]
 
-    resources :variants
+    resources :variants, except: [:index, :show]
 
     resources :products
   end

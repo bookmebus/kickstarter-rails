@@ -11,14 +11,23 @@ module Admin
         
         def new
             @variant = Variant.new
-            @variants = Variant.all
 
             @product = Product.find_by_id(params[:product_id])
+
+            @option_types = OptionType.joins(:option_type_products).where(option_type_products: { product_id: @product.id })
+            @option_values = @option_types.map(&:option_values).flatten
         end
         
         def create
             @variant = Variant.new(variant_params)
+
             if @variant.save
+                @option_value_ids = params[:option_value_ids]
+
+                @option_value_ids.each do |option_value_id|
+                    OptionValueVariant.create(option_value_id: option_value_id, variant_id: @variant.id)
+                end
+
                 flash[:notice] = "Variant was successfully created."
                 redirect_to admin_variants_path
             else
@@ -56,7 +65,7 @@ module Admin
         private
         
         def variant_params
-            params.require(:variant).permit(:name)
+            params.require(:variant).permit(:product_id, :image, :price, :quantity)
         end
     end
 end
