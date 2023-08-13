@@ -19,9 +19,9 @@ Rails.application.routes.draw do
 
   resources :products
   resources :carts
-  get 'cart', to: 'cart#show'
-  post 'cart/add', to: 'cart#add', as: :cart_add # Added this line
-  post 'cart/remove', to: 'cart#remove', as: :cart_remove # Added this line
+  get 'cart', to: 'cart#show', as: :cart_path
+  post 'cart/add', to: 'cart#add', as: :cart_add
+  post 'cart/remove', to: 'cart#remove', as: :cart_remove
 
   # Defines routes for admin
   namespace :admin do
