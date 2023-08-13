@@ -1,0 +1,5 @@
+<h1>Your Cart</h1>
+<% @cart.orderables.each do |orderable| %>
+  <% product = orderable.product %> <!-- Add this line to get the associated product -->
+<% end %>
+<p>Your total is $<%= @cart.total %> </p>

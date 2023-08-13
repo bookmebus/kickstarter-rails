@@ -1,0 +1,10 @@
+<div class="cart-details">
+  <h2>Your Cart</h2>
+ <% @cart.orderables.each do |orderable| %>
+  <% product = orderable.product %>
+  <% variant = orderable.variant %>  <!-- Add this line to get the associated variant -->
+  <p><%= product.name %> * <%= orderable.quantity %> = $<%= orderable.total %></p>
+<% end %>
+
+  <p>Your total is $<%= @cart.total %></p>
+</div>
