@@ -1,36 +1,60 @@
 <div class="max-w-lg mx-auto">
   <div class="py-5 px-7 space-y-5 bg-gray-200 border-md rounded-md">
-    <div>
+    <!-- Product Name -->
+    <div class="product-details">
       <strong>Product Name:</strong>
       <%= @product.name %>
     </div>
-    <div>
+    <!-- Product Description -->
+    <div class="product-details">
       <strong>Description:</strong>
       <%= @product.description %>
     </div>
-    <% @variants.each do |variant| %>
-      <div class="px-6 py-5 bg-white rounded">
-          <div>
+    <!-- Loop through product variants -->
+    <% @product.variants.each do |variant| %>
+      <div class="px-6 py-5 bg-white rounded product-variant">
+        <!-- Variant Specification -->
+        <div class="variant-details">
           <strong>Spec:</strong>
           <% variant.option_values.each do |option_value| %>
             <%= option_value.value %>
           <% end %>
         </div>
-        <div class="flex space-x-5">
+        <!-- Variant Price -->
+        <div class="variant-details">
           <strong>Price:</strong>
           <p>$<%= variant.price %></p>
         </div>
-        <div>
+        <!-- Variant Stock Quantity -->
+        <div class="variant-details">
           <strong>Stock:</strong> 
           <%= variant.quantity %>
         </div>
-        <div class="my-5">
-          <img src=<%= variant.image %>>
+        <!-- Variant Image -->
+        <div class="variant-image">
+          <img src="<%= variant.image %>">
         </div>
-        <div class="flex justify-end">
-          <button class="px-6 py-2 text-white text-sm bg-blue-500">Add to cart</button>
-        </div>
+        <!-- "Add to Cart" Button -->
+        <button class="px-6 py-2 text-white text-sm bg-blue-500" 
+                data-action="click->cart#add"
+                data-id="<%= variant.id %>"
+                data-quantity="1"
+                data-turbo-frame="cart">Add to cart</button>
       </div>
+    <% end %>
+    <!-- Common Product Details Block -->
+    <div class="product-details">
+      <strong>Name:</strong>
+      <%= @product.name %>
+      <strong>Description:</strong>
+      <%= @product.description %>
+      <strong>Price:</strong>
+      <p>$<%= @product.variants.first.price %></p>
+      <%= form_with(url: cart_add_path) do |f| %>
+        <%= f.hidden_field :id, value: @product.id %>
+        <%= f.number_field :quantity, value: 0, min: 1 %>
+        <%= f.submit "Add To Cart" %>
       <% end %>
+    </div>
   </div>
 </div>

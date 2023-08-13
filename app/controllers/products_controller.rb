@@ -1,42 +1,70 @@
 class ProductsController < ApplicationController
-  def index
-        @products = Product.all
-  end
-  
-  def show
-      @product = Product.find_by_id(params[:id])
-      @variants = @product.variants
+  before_action :set_product, only: %i[ show edit update destroy ]
 
+  # GET /products or /products.json
+  def index
+    @products = Product.all
   end
+
+  # GET /products/1 or /products/1.json
+  def show
+  end
+
+  # GET /products/new
   def new
-      @product = Product.new 
+    @product = Product.new
   end
+
+  # GET /products/1/edit
+  def edit
+  end
+
+  # POST /products or /products.json
   def create
     @product = Product.new(product_params)
-    if @product.save
-        redirect_to @product
-    else
-        render :new
+
+    respond_to do |format|
+      if @product.save
+        format.html { redirect_to product_url(@product), notice: "Product was successfully created." }
+        format.json { render :show, status: :created, location: @product }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @product.errors, status: :unprocessable_entity }
+      end
     end
   end
-  def edit
-    @product = Product.find_by_id(params[:id])
-  end
+
+  # PATCH/PUT /products/1 or /products/1.json
   def update
-    @product = Product.find_by_id(params[:id])
-    if @product.update(product_params)
-        redirect_to @product
-    else
-        render :edit
+    respond_to do |format|
+      if @product.update(product_params)
+        format.html { redirect_to product_url(@product), notice: "Product was successfully updated." }
+        format.json { render :show, status: :ok, location: @product }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @product.errors, status: :unprocessable_entity }
+      end
     end
   end
+
+  # DELETE /products/1 or /products/1.json
   def destroy
-    @product=Product.find_by_id(params[:id])
     @product.destroy
-    redirect_to products_path
+
+    respond_to do |format|
+      format.html { redirect_to products_url, notice: "Product was successfully destroyed." }
+      format.json { head :no_content }
+    end
   end
+
   private
-  def product_programs 
-      params.require(:product).permit(:name, :image, :quantity, :description, :price, :discount_price, :is_out_of_stock, :vendor_id)
-  end
+    # Use callbacks to share common setup or constraints between actions.
+    def set_product
+      @product = Product.find(params[:id])
+    end
+
+    # Only allow a list of trusted parameters through.
+    def product_params
+      params.require(:product).permit(:name, :description, :price)
+    end
 end

@@ -10,9 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_10_164746) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_13_171829) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "carts", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "option_type_products", force: :cascade do |t|
     t.bigint "product_id", null: false
@@ -46,11 +51,43 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_10_164746) do
     t.index ["option_type_id"], name: "index_option_values_on_option_type_id"
   end
 
+  create_table "order_items", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "cart_id", null: false
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_id"], name: "index_order_items_on_cart_id"
+    t.index ["product_id"], name: "index_order_items_on_product_id"
+  end
+
+  create_table "orderables", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "cart_id", null: false
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "variant_id", null: false
+    t.index ["cart_id"], name: "index_orderables_on_cart_id"
+    t.index ["product_id"], name: "index_orderables_on_product_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "customer_name"
+    t.decimal "total_amount", precision: 10, scale: 2
+    t.date "order_date"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "price", precision: 10, scale: 2
   end
 
   create_table "users", force: :cascade do |t|
@@ -92,5 +129,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_10_164746) do
   add_foreign_key "option_value_variants", "option_values"
   add_foreign_key "option_value_variants", "variants"
   add_foreign_key "option_values", "option_types"
+  add_foreign_key "order_items", "products"
+  add_foreign_key "orderables", "carts"
+  add_foreign_key "orderables", "products"
+  add_foreign_key "orderables", "variants"
+  add_foreign_key "orders", "users"
   add_foreign_key "variants", "products"
 end
