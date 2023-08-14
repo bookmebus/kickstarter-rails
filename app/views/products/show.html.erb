@@ -1,41 +1,60 @@
-
-  <main class="max-w-lg mx-auto">
-    <div class="py-5 px-7 space-y-5 bg-gray-200 border-md rounded-md">
-      <!-- Product Name -->
-      <div class="product-details">
-        <strong class="text-lg font-semibold">Product Name:</strong>
-        <p><%= @product.name %></p>
-      </div>
-      <!-- Product ription -->
-      <div class="product-details">
-        <strong class="text-lg font-semibold">Description:</strong>
-        <p><%= @product.description %></p>
-      </div>
-      <!-- Loop through product variants -->
-      <% @product.variants.each do |variant| %>
-        <!-- ... (variant details) ... -->
-      <% end %>
-      <!-- Common Product Details Block -->
-      <div class="product-details">
-        <strong class="text-lg font-semibold">Name:</strong>
-        <p><%= @product.name %></p>
-        <strong class="text-lg font-semibold">Price:</strong>
-        <p class="text-gray-600">$<%= @product.variants.first.price %></p>
-        <form action="<%= cart_add_path %>" method="post" class="mt-4">
-          <%= hidden_field_tag :id, @product.id %>
-          <label for="quantity" class="block font-semibold mb-1">Quantity:</label>
-          <input type="number" name="quantity" value="1" min="1" class="w-16 py-1 px-2 border rounded text-gray-700">
-          <button type="submit" class="mt-2 btn-primary px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600">Add To Cart</button>
-        </form>
-      </div>
-      
-      <!-- Shopping Cart Icon -->
-      <div class="flex justify-end mt-4">
-        <a href="<%= cart_path_path %>" class="flex items-center text-blue-500 hover:text-blue-700">
-          View Cart
-        </a>
-      </div>
+<div class="max-w-lg mx-auto">
+  <div class="py-5 px-7 space-y-5 bg-gray-200 border-md rounded-md">
+    <!-- Product Name -->
+    <div class="product-details">
+      <strong>Product Name:</strong>
+      <%= @product.name %>
     </div>
-  </main>
-  
-
+    <!-- Product Description -->
+    <div class="product-details">
+      <strong>Description:</strong>
+      <%= @product.description %>
+    </div>
+    <!-- Loop through product variants -->
+    <% @product.variants.each do |variant| %>
+      <div class="px-6 py-5 bg-white rounded product-variant">
+        <!-- Variant Specification -->
+        <div class="variant-details">
+          <strong>Spec:</strong>
+          <% variant.option_values.each do |option_value| %>
+            <%= option_value.value %>
+          <% end %>
+        </div>
+        <!-- Variant Price -->
+        <div class="variant-details">
+          <strong>Price:</strong>
+          <p>$<%= variant.price %></p>
+        </div>
+        <!-- Variant Stock Quantity -->
+        <div class="variant-details">
+          <strong>Stock:</strong> 
+          <%= variant.quantity %>
+        </div>
+        <!-- Variant Image -->
+        <div class="variant-image">
+          <img src="<%= variant.image %>">
+        </div>
+        <!-- "Add to Cart" Button -->
+        <button class="px-6 py-2 text-white text-sm bg-blue-500" 
+                data-action="click->cart#add"
+                data-id="<%= variant.id %>"
+                data-quantity="1"
+                data-turbo-frame="cart">Add to cart</button>
+      </div>
+    <% end %>
+    <!-- Common Product Details Block -->
+    <div class="product-details">
+      <strong>Name:</strong>
+      <%= @product.name %>
+      <strong>Description:</strong>
+      <%= @product.description %>
+      <strong>Price:</strong>
+      <p>$<%= @product.variants.first.price %></p>
+      <%= form_with(url: cart_add_path) do |f| %>
+        <%= f.hidden_field :id, value: @product.id %>
+        <%= f.number_field :quantity, value: 0, min: 1 %>
+        <%= f.submit "Add To Cart" %>
+      <% end %>
+    </div>
+  </div>
+</div>
