@@ -1,5 +1,62 @@
-<h1>Your Cart</h1>
-<% @cart.orderables.each do |orderable| %>
-  <% product = orderable.product %> <!-- Add this line to get the associated product -->
-<% end %>
-<p>Your total is $<%= @cart.total %> </p>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+  <header class="bg-white p-4 shadow-md">
+    <!-- Header content goes here -->
+  </header>
+  
+  <main class="max-w-4xl mx-auto p-8">
+    <h1 class="text-2xl font-semibold mb-4">Your Cart</h1>
+    <div class="cart-items">
+      <% @cart.orderables.each do |orderable| %>
+        <% product = orderable.product %>
+        <div class="cart-item bg-white rounded-lg shadow-md p-4 mb-4">
+          <div class="flex items-center">
+            <div class="item-image">
+              <img src="<%= orderable.variant.image %>" alt="<%= product.name %>" class="w-16 h-16 rounded-full">
+            </div>
+            <div class="item-info ml-4">
+              <h3 class="font-semibold"><%= product.name %></h3>
+              <p class="text-gray-500"><%= product.description %></p>
+            </div>
+          </div>
+          <div class="flex mt-2">
+            <div class="item-price flex-1">
+              <p class="text-gray-600">Price: $<%= orderable.variant.price %></p>
+            </div>
+            <div class="item-quantity">
+              <p class="text-gray-600">Quantity: <%= orderable.quantity %></p>
+            </div>
+            <div class="item-total">
+              <p class="text-gray-600">Total: $<%= orderable.total %></p>
+            </div>
+            <div class="item-remove ml-4">
+              <%= form_with(url: cart_remove_path) do |f| %>
+                <%= f.hidden_field :id, value: orderable.id %>
+                <button type="submit" class="text-red-500 hover:text-red-700">Remove</button>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="checkout-buttons mt-6 flex justify-between">
+      <a href="checkout.html" class="btn-primary px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600">Proceed to Checkout</a>
+      <a href="<%= products_path %>" class="btn-secondary px-4 py-2 rounded-md bg-gray-300 text-gray-800 hover:bg-gray-400">Continue Shopping</a>
+    </div>
+  </main>
+  
+  <footer class="bg-white p-4 mt-6 shadow-md">
+    <!-- Footer content goes here -->
+  </footer>
+</body>
+</html>

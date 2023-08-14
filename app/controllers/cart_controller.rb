@@ -15,7 +15,7 @@ class CartController < ApplicationController
       elsif quantity <= 0
         current_orderable.destroy if current_orderable
       else
-        @cart.orderables.create(product: @product, variant: variant, quantity: quantity)
+        @cart.orderables.create(product: @product, variant: @variant, quantity: quantity)
       end
     
       respond_to do |format|
