@@ -1,19 +1,29 @@
 <div class="max-w-lg mx-auto">
-  <h2 class="my-5 text-lg">
-    Product List
+  <div class="flex justify-between my-5">
+    <h2 class="text-lg font-bold">
+      Product List
+    </h2>
     <%= link_to "Add Product", new_admin_product_path, class: "px-6 py-2 bg-blue-500 text-white" %>
-  </h2>
+  </div>
   <table class="w-full border-collapse">
     <thead>
       <tr>
+        <th class="border p-2">Id</p>
         <th class="border p-2">Name</th>
+        <th class="border p-2">Link</th>
       </tr>
     </thead>
     <tbody>
       <% @products.each do |product| %>
         <tr>
           <td class="border p-2">
-            <%= link_to product.name, admin_product_path(product) %>
+            <%= product.id %>
+          </td>
+          <td class="border p-2">
+            <%= product.name %>
+          </td>
+          <td class="border p-2">
+            <%= link_to "show", admin_product_path(product), class: "text-blue-500" %>
           </td>
         </tr>
       <% end %>

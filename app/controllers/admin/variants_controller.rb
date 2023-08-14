@@ -29,7 +29,7 @@ module Admin
                 end
 
                 flash[:notice] = "Variant was successfully created."
-                redirect_to admin_variants_path
+                redirect_to admin_product_path(@variant.product)
             else
                 flash[:error] = "Variant could not be created."
                 render :new
